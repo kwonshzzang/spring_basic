@@ -7,22 +7,25 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Base64;
+
 @SpringBootApplication
 public class SpringBasicApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBasicApplication.class, args);
-        String url = "www.naver.com/books/it?page=10&size=20&name=spring-boot";
+        System.out.println(Base64.getEncoder().encodeToString("steve@gmail.com".getBytes()));
+//        String url = "www.naver.com/books/it?page=10&size=20&name=spring-boot";
 
-        ApplicationContext context = ApplicationContextProvider.getContext();
+//      ApplicationContext context = ApplicationContextProvider.getContext();
 //      Base64Encoder base64Encoder = context.getBean(Base64Encoder.class);
 //      UrlEncoder urlEncoder = context.getBean(UrlEncoder.class);
 
 //      Encoder encoder = context.getBean(Encoder.class);
 //      Encoder encoder = new Encoder(base64Encoder);
 
-        Encoder encoder = context.getBean("encoderUrl", Encoder.class);
-        String result = encoder.encode(url);
-        System.out.println(result);
+//        Encoder encoder = context.getBean("encoderUrl", Encoder.class);
+//        String result = encoder.encode(url);
+//        System.out.println(result);
 //
 //      encoder.setIEncoder(urlEncoder);
 //      result = encoder.encode(url);

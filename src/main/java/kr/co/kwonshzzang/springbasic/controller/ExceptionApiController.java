@@ -1,21 +1,31 @@
 package kr.co.kwonshzzang.springbasic.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import kr.co.kwonshzzang.springbasic.dto.exception.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/exception")
+@Validated
 public class ExceptionApiController {
 
     @GetMapping("")
-    public User get(@RequestParam(required = false) String name, @RequestParam(required = false) Integer age) {
+    public User get(
+            @Size(min = 2)
+            @RequestParam String name,
+
+            @NotNull
+            @Min(1)
+            @RequestParam Integer age) {
         User user = new User(name, age);
 
-        int a = 10 + age;
         return user;
     }
 
@@ -24,9 +34,4 @@ public class ExceptionApiController {
         return user;
     }
 
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException e) {
-        System.out.println("api controller");
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    }
 }
